@@ -3,30 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kathir | Data Engineer</title>
+  <meta name="description" content="Kathir — Junior Data Engineer in the UK. SQL-first data modelling, reliable ETL/ELT, Airflow orchestration, and analytics-ready datasets." />
+  <meta name="theme-color" content="#0b1020" />
+  <title>Kathir | Junior Data Engineer</title>
 
   <style>
     :root{
-      --bg: rgba(0,0,0,.58);
+      --bg0:#070a12;
       --glass: rgba(255,255,255,.10);
-      --glass-2: rgba(255,255,255,.14);
+      --glass2: rgba(255,255,255,.14);
+      --line: rgba(255,255,255,.18);
       --text: rgba(255,255,255,.92);
       --muted: rgba(255,255,255,.72);
-      --line: rgba(255,255,255,.18);
-      --accent: #7dd3fc; /* light sky */
+      --accent: #7dd3fc;
+      --accent2:#a78bfa;
+      --shadow: 0 18px 70px rgba(0,0,0,.45);
+      --radius: 18px;
     }
 
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0;
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
       font-family: Arial, Helvetica, sans-serif;
-      color: var(--text);
-      background: #000;
+      color:var(--text);
+      background: var(--bg0);
     }
 
-    /* Full-screen hero background image */
-    .hero {
+    /* Full background hero */
+    .hero{
       min-height: 100vh;
       background-image: url("hero-data-engineer.png");
       background-size: cover;
@@ -36,18 +41,18 @@
       overflow: hidden;
     }
 
-    /* Overlay for readability + aesthetic */
+    /* Overlay + lighting */
     .hero::before{
       content:"";
       position:absolute;
       inset:0;
       background:
-        radial-gradient(1000px 600px at 20% 10%, rgba(125,211,252,.25), transparent 60%),
-        radial-gradient(900px 500px at 90% 30%, rgba(167,139,250,.22), transparent 55%),
-        linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.72));
+        radial-gradient(1100px 650px at 18% 8%, rgba(125,211,252,.26), transparent 60%),
+        radial-gradient(900px 520px at 88% 28%, rgba(167,139,250,.22), transparent 56%),
+        linear-gradient(180deg, rgba(0,0,0,.50), rgba(0,0,0,.78));
     }
 
-    /* subtle grain */
+    /* Subtle grain for premium feel */
     .hero::after{
       content:"";
       position:absolute;
@@ -60,29 +65,33 @@
     .wrap{
       position: relative;
       z-index: 1;
-      max-width: 1100px;
+      max-width: 1120px;
       margin: 0 auto;
-      padding: 28px 18px 80px;
+      padding: 22px 18px 84px;
     }
 
-    /* Top nav */
+    /* Sticky nav */
     .nav{
+      position: sticky;
+      top: 14px;
+      z-index: 50;
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap: 14px;
       padding: 12px 14px;
       border: 1px solid var(--line);
-      background: rgba(0,0,0,.25);
-      backdrop-filter: blur(10px);
+      background: rgba(0,0,0,.28);
+      backdrop-filter: blur(12px);
       border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,.25);
     }
 
     .brand{
       display:flex;
       align-items:center;
       gap: 10px;
-      min-width: 220px;
+      min-width: 240px;
     }
 
     .dot{
@@ -93,13 +102,20 @@
       box-shadow: 0 0 18px rgba(125,211,252,.55);
     }
 
-    .brand strong{ letter-spacing: .3px; }
+    .brand strong{ letter-spacing: .2px; }
     .brand span{ color: var(--muted); font-size: .95rem; }
+
+    .navlinks{
+      display:flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
 
     .nav a{
       color: var(--text);
       text-decoration: none;
-      font-weight: 700;
+      font-weight: 800;
       padding: 10px 12px;
       border-radius: 12px;
       border: 1px solid transparent;
@@ -109,9 +125,9 @@
       background: rgba(255,255,255,.06);
     }
 
-    /* Hero headline overlay */
+    /* Hero content */
     .headline{
-      margin-top: 64px;
+      margin-top: 62px;
       display:grid;
       grid-template-columns: 1.2fr .8fr;
       gap: 22px;
@@ -119,18 +135,19 @@
     }
 
     .h1{
-      font-size: clamp(2.3rem, 4.2vw, 3.6rem);
+      font-size: clamp(2.35rem, 4.3vw, 3.7rem);
       line-height: 1.05;
       margin: 0 0 10px;
       font-weight: 900;
-      letter-spacing: -0.8px;
+      letter-spacing: -0.9px;
     }
 
     .tagline{
       margin: 0;
       color: var(--muted);
       font-size: 1.08rem;
-      max-width: 55ch;
+      max-width: 60ch;
+      font-weight: 650;
     }
 
     .chips{
@@ -142,31 +159,32 @@
     .chip{
       padding: 9px 12px;
       border: 1px solid var(--line);
-      background: rgba(0,0,0,.25);
+      background: rgba(0,0,0,.28);
       backdrop-filter: blur(10px);
       border-radius: 999px;
-      font-weight: 700;
-      color: rgba(255,255,255,.85);
+      font-weight: 800;
+      color: rgba(255,255,255,.86);
       font-size: .95rem;
     }
 
-    /* Right-side quick card */
     .quick{
       border: 1px solid var(--line);
       background: rgba(255,255,255,.08);
-      backdrop-filter: blur(12px);
-      border-radius: 18px;
+      backdrop-filter: blur(14px);
+      border-radius: var(--radius);
       padding: 18px;
+      box-shadow: var(--shadow);
     }
     .quick h3{
-      margin: 0 0 10px;
-      font-size: 1.05rem;
+      margin: 0 0 8px;
+      font-size: 1.06rem;
       letter-spacing: .2px;
     }
     .quick p{
       margin: 0 0 12px;
       color: var(--muted);
-      font-weight: 600;
+      font-weight: 700;
+      line-height: 1.55;
     }
     .btns{
       display:flex;
@@ -179,20 +197,20 @@
       padding: 10px 12px;
       border-radius: 14px;
       border: 1px solid var(--line);
-      background: rgba(0,0,0,.25);
+      background: rgba(0,0,0,.28);
       color: var(--text);
       text-decoration:none;
-      font-weight: 800;
+      font-weight: 900;
     }
     .btn.primary{
-      border-color: rgba(125,211,252,.45);
+      border-color: rgba(125,211,252,.46);
       box-shadow: 0 0 24px rgba(125,211,252,.12);
     }
     .btn:hover{
-      background: rgba(255,255,255,.07);
+      background: rgba(255,255,255,.08);
     }
 
-    /* Section cards */
+    /* Sections */
     .section{
       margin-top: 44px;
       display: grid;
@@ -203,14 +221,15 @@
     .card{
       border: 1px solid var(--line);
       background: rgba(255,255,255,.08);
-      backdrop-filter: blur(12px);
-      border-radius: 18px;
+      backdrop-filter: blur(14px);
+      border-radius: var(--radius);
       padding: 18px;
+      box-shadow: 0 12px 50px rgba(0,0,0,.22);
     }
 
     .card h2{
       margin: 0 0 12px;
-      font-size: 1.2rem;
+      font-size: 1.22rem;
       letter-spacing: .3px;
     }
 
@@ -222,25 +241,34 @@
 
     .proj{
       border: 1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.20);
+      background: rgba(0,0,0,.22);
       border-radius: 16px;
       padding: 14px;
-      transition: transform .15s ease, background .15s ease;
+      transition: transform .16s ease, background .16s ease;
+      min-height: 150px;
     }
     .proj:hover{
       transform: translateY(-2px);
-      background: rgba(0,0,0,.28);
+      background: rgba(0,0,0,.30);
     }
     .proj strong{
       display:block;
-      font-size: 1.02rem;
+      font-size: 1.04rem;
       margin-bottom: 6px;
     }
     .meta{
       color: var(--muted);
-      font-weight: 600;
+      font-weight: 700;
       font-size: .95rem;
       margin: 0 0 10px;
+      line-height: 1.45;
+    }
+    .outcome{
+      color: rgba(255,255,255,.86);
+      font-weight: 800;
+      font-size: .95rem;
+      margin: 0 0 12px;
+      line-height: 1.45;
     }
 
     .links{
@@ -251,7 +279,7 @@
     .links a{
       color: var(--text);
       text-decoration:none;
-      font-weight: 800;
+      font-weight: 900;
       border: 1px solid rgba(255,255,255,.18);
       padding: 8px 10px;
       border-radius: 12px;
@@ -271,16 +299,23 @@
       margin: 0;
       padding-left: 18px;
       color: var(--muted);
-      font-weight: 650;
+      font-weight: 750;
       line-height: 1.7;
     }
 
     .footer{
-      margin-top: 28px;
+      margin-top: 24px;
       color: rgba(255,255,255,.60);
-      font-weight: 700;
+      font-weight: 800;
       font-size: .95rem;
       text-align: center;
+    }
+
+    /* Accessibility */
+    a:focus-visible{
+      outline: 3px solid rgba(125,211,252,.55);
+      outline-offset: 2px;
+      border-radius: 12px;
     }
 
     /* Responsive */
@@ -290,6 +325,7 @@
       .mini{ grid-template-columns: 1fr; }
       .brand{ min-width: auto; }
       .nav{ flex-wrap: wrap; justify-content: center; }
+      .navlinks{ justify-content: center; }
     }
   </style>
 </head>
@@ -301,12 +337,12 @@
         <div class="brand">
           <div class="dot"></div>
           <div>
-            <strong>Kathir</strong><br/>
-            <span>Data Engineer • SQL • Pipelines</span>
+            <strong>Kathir</strong><br />
+            <span>Junior Data Engineer • SQL • Pipelines</span>
           </div>
         </div>
 
-        <div>
+        <div class="navlinks">
           <a href="#projects">Projects</a>
           <a href="#stack">Stack</a>
           <a href="#contact">Contact</a>
@@ -316,28 +352,28 @@
       <!-- Overlay hero text -->
       <div class="headline">
         <div>
-          <h1 class="h1">Build data pipelines that don’t break.</h1>
+          <h1 class="h1">Build reliable data pipelines for analytics.</h1>
           <p class="tagline">
-            Data Engineer with an MSc in Data Science.
-            I focus on SQL-first modelling, reliable ETL/ELT workflows, and analytics-ready datasets.
+            Junior Data Engineer in the UK with an MSc in Data Science.
+            I focus on SQL-first modelling, ETL/ELT workflows, and analytics-ready datasets with quality checks.
           </p>
 
           <div class="chips">
-            <div class="chip">SQL</div>
+            <div class="chip">SQL (PostgreSQL)</div>
             <div class="chip">Python</div>
-            <div class="chip">ETL</div>
+            <div class="chip">ETL / ELT</div>
             <div class="chip">Airflow</div>
-            <div class="chip">AWS</div>
+            <div class="chip">AWS S3</div>
           </div>
         </div>
 
         <div class="quick">
           <h3>Available</h3>
-          <p>Open to Data Engineer / Analytics Engineer roles in the UK.</p>
+          <p>Open to Junior Data Engineer / Analytics Engineer roles in the UK.</p>
           <div class="btns">
             <a class="btn primary" href="#projects">View Projects</a>
+            <a class="btn" href="Kathiravan_Resume.pdf" download>Download CV</a>
             <a class="btn" href="https://github.com/Kathirninja" target="_blank" rel="noopener">GitHub</a>
-            <a class="btn" href="#contact">Contact</a>
           </div>
         </div>
       </div>
@@ -349,17 +385,19 @@
 
           <div class="grid">
             <div class="proj">
-              <strong>End-to-End ELT Pipeline</strong>
-              <p class="meta">Raw → staging → marts • tests • reproducible Docker setup</p>
+              <strong>End-to-End ETL / ELT Pipeline</strong>
+              <p class="meta">Raw → staging → marts • orchestration • tests • reproducible Docker setup</p>
+              <p class="outcome">Outcome: analytics-ready datasets with documented transformations and basic data quality checks.</p>
               <div class="links">
                 <a href="https://github.com/Kathirninja/e2e-elt-pipeline" target="_blank" rel="noopener">Repo</a>
-                <a href="#contact">Ask for demo</a>
+                <a href="#contact">Contact</a>
               </div>
             </div>
 
             <div class="proj">
               <strong>SQL Business Case Studies</strong>
               <p class="meta">Cohorts • funnels • retention • window functions • optimised queries</p>
+              <p class="outcome">Outcome: clear metrics definitions and fast, readable queries for decision-making.</p>
               <div class="links">
                 <a href="https://github.com/Kathirninja/sql-business-cases" target="_blank" rel="noopener">Repo</a>
                 <a href="#stack">Skills</a>
@@ -369,6 +407,7 @@
             <div class="proj">
               <strong>Streaming Data Pipeline</strong>
               <p class="meta">Event ingestion • consumers • idempotency • near real-time outputs</p>
+              <p class="outcome">Outcome: reliable event processing with deduplication patterns and clean downstream tables.</p>
               <div class="links">
                 <a href="https://github.com/Kathirninja/streaming-data-pipeline" target="_blank" rel="noopener">Repo</a>
                 <a href="#contact">Contact</a>
@@ -377,16 +416,16 @@
           </div>
         </div>
 
-        <!-- Stack + what you do -->
+        <!-- Stack + How I work -->
         <div class="mini">
           <div class="card" id="stack">
             <h2>Stack</h2>
             <ul class="clean">
-              <li><strong>SQL:</strong> SQL, modelling, optimisation, window functions</li>
-              <li><strong>Python:</strong> pandas, ETL scripts, APIs, scheduling</li>
-              <li><strong>Orchestration:</strong> Airflow / Prefect</li>
-              <li><strong>Transform:</strong> dpt,tests, docs</li>
-              <li><strong>Ops:</strong> Git, Docker, CI basics</li>
+              <li><strong>SQL:</strong> modelling, optimisation, window functions</li>
+              <li><strong>Python:</strong> ETL scripts, pandas, APIs, scheduling</li>
+              <li><strong>Orchestration:</strong> Airflow (DAGs, incremental loads)</li>
+              <li><strong>Cloud:</strong> AWS S3 (storage basics)</li>
+              <li><strong>Ops:</strong> Git, Docker, Linux (basic)</li>
             </ul>
           </div>
 
@@ -409,13 +448,13 @@
           </p>
           <div class="links">
             <a href="https://github.com/Kathirninja" target="_blank" rel="noopener">GitHub</a>
-            <a href="https://www.linkedin.com/in/YOUR-LINKEDIN" target="_blank" rel="noopener">www.linkedin.com/in/kathir-data</a>
-            <a href="mailto:YOUR_EMAIL">iamkathiravan@outlook.com</a>
+            <a href="https://www.linkedin.com/in/kathir8" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="mailto:iamkathiravan@outlook.com">Email</a>
           </div>
         </div>
 
         <div class="footer">
-          © <span id="y"></span> Kathir • Built with GitHub Pages
+          © <span id="y"></span> Kathir • Data Engineer Portfolio
         </div>
       </div>
     </div>
@@ -426,6 +465,7 @@
   </script>
 </body>
 </html>
+
 
 
 
