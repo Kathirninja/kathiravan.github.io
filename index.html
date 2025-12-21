@@ -6,75 +6,426 @@
   <title>Kathir | Data Engineer</title>
 
   <style>
+    :root{
+      --bg: rgba(0,0,0,.58);
+      --glass: rgba(255,255,255,.10);
+      --glass-2: rgba(255,255,255,.14);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --line: rgba(255,255,255,.18);
+      --accent: #7dd3fc; /* light sky */
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: #000;
+    }
+
+    /* Full-screen hero background image */
+    .hero {
       min-height: 100vh;
       background-image: url("hero-data-engineer.png");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      color: #ffffff;
+      position: relative;
+      overflow: hidden;
     }
 
-    /* DARK OVERLAY */
-    .overlay {
-      min-height: 100vh;
-      background: rgba(0, 0, 0, 0.55);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 40px;
+    /* Overlay for readability + aesthetic */
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(1000px 600px at 20% 10%, rgba(125,211,252,.25), transparent 60%),
+        radial-gradient(900px 500px at 90% 30%, rgba(167,139,250,.22), transparent 55%),
+        linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.72));
     }
 
-    /* HERO TEXT */
-    .hero-text h1 {
-      font-size: 3rem;
-      font-weight: 800;
-      margin: 0;
+    /* subtle grain */
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.08'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+      pointer-events: none;
     }
 
-    .hero-text p {
-      font-size: 1.4rem;
-      font-weight: 600;
-      margin: 10px 0 30px;
+    .wrap{
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px 18px 80px;
     }
 
-    /* CONTENT SECTION */
-    .content {
-      max-width: 900px;
+    /* Top nav */
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.25);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
     }
 
-    h2 {
-      margin-top: 40px;
-      font-size: 1.8rem;
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      min-width: 220px;
     }
 
-    .project {
-      margin-bottom: 22px;
+    .dot{
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 18px rgba(125,211,252,.55);
     }
 
-    a {
-      color: #4da3ff;
+    .brand strong{ letter-spacing: .3px; }
+    .brand span{ color: var(--muted); font-size: .95rem; }
+
+    .nav a{
+      color: var(--text);
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 700;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+    }
+    .nav a:hover{
+      border-color: var(--line);
+      background: rgba(255,255,255,.06);
     }
 
-    a:hover {
-      text-decoration: underline;
+    /* Hero headline overlay */
+    .headline{
+      margin-top: 64px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 22px;
+      align-items: start;
     }
 
-    @media (max-width: 600px) {
-      .hero-text h1 {
-        font-size: 2.2rem;
-      }
-      .hero-text p {
-        font-size: 1.1rem;
-      }
+    .h1{
+      font-size: clamp(2.3rem, 4.2vw, 3.6rem);
+      line-height: 1.05;
+      margin: 0 0 10px;
+      font-weight: 900;
+      letter-spacing: -0.8px;
+    }
+
+    .tagline{
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+      max-width: 55ch;
+    }
+
+    .chips{
+      margin-top: 16px;
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .chip{
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.25);
+      backdrop-filter: blur(10px);
+      border-radius: 999px;
+      font-weight: 700;
+      color: rgba(255,255,255,.85);
+      font-size: .95rem;
+    }
+
+    /* Right-side quick card */
+    .quick{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.08);
+      backdrop-filter: blur(12px);
+      border-radius: 18px;
+      padding: 18px;
+    }
+    .quick h3{
+      margin: 0 0 10px;
+      font-size: 1.05rem;
+      letter-spacing: .2px;
+    }
+    .quick p{
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .btns{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .btn{
+      display:inline-block;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.25);
+      color: var(--text);
+      text-decoration:none;
+      font-weight: 800;
+    }
+    .btn.primary{
+      border-color: rgba(125,211,252,.45);
+      box-shadow: 0 0 24px rgba(125,211,252,.12);
+    }
+    .btn:hover{
+      background: rgba(255,255,255,.07);
+    }
+
+    /* Section cards */
+    .section{
+      margin-top: 44px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .card{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.08);
+      backdrop-filter: blur(12px);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .card h2{
+      margin: 0 0 12px;
+      font-size: 1.2rem;
+      letter-spacing: .3px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .proj{
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.20);
+      border-radius: 16px;
+      padding: 14px;
+      transition: transform .15s ease, background .15s ease;
+    }
+    .proj:hover{
+      transform: translateY(-2px);
+      background: rgba(0,0,0,.28);
+    }
+    .proj strong{
+      display:block;
+      font-size: 1.02rem;
+      margin-bottom: 6px;
+    }
+    .meta{
+      color: var(--muted);
+      font-weight: 600;
+      font-size: .95rem;
+      margin: 0 0 10px;
+    }
+
+    .links{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .links a{
+      color: var(--text);
+      text-decoration:none;
+      font-weight: 800;
+      border: 1px solid rgba(255,255,255,.18);
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.06);
+    }
+    .links a:hover{
+      background: rgba(255,255,255,.10);
+    }
+
+    .mini{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    ul.clean{
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-weight: 650;
+      line-height: 1.7;
+    }
+
+    .footer{
+      margin-top: 28px;
+      color: rgba(255,255,255,.60);
+      font-weight: 700;
+      font-size: .95rem;
+      text-align: center;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .headline{ grid-template-columns: 1fr; }
+      .grid{ grid-template-columns: 1fr; }
+      .mini{ grid-template-columns: 1fr; }
+      .brand{ min-width: auto; }
+      .nav{ flex-wrap: wrap; justify-content: center; }
     }
   </style>
 </head>
 
-<b
+<body>
+  <section class="hero" id="top">
+    <div class="wrap">
+      <div class="nav">
+        <div class="brand">
+          <div class="dot"></div>
+          <div>
+            <strong>Kathir</strong><br/>
+            <span>Data Engineer • SQL • Pipelines</span>
+          </div>
+        </div>
+
+        <div>
+          <a href="#projects">Projects</a>
+          <a href="#stack">Stack</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+
+      <!-- Overlay hero text -->
+      <div class="headline">
+        <div>
+          <h1 class="h1">Build data pipelines that don’t break.</h1>
+          <p class="tagline">
+            Data Engineer (Entry-Level) with an MSc in Data Science.
+            I focus on SQL-first modelling, reliable ETL/ELT workflows, and analytics-ready datasets.
+          </p>
+
+          <div class="chips">
+            <div class="chip">SQL (PostgreSQL)</div>
+            <div class="chip">Python</div>
+            <div class="chip">dbt</div>
+            <div class="chip">Airflow</div>
+            <div class="chip">Docker</div>
+          </div>
+        </div>
+
+        <div class="quick">
+          <h3>Available</h3>
+          <p>Open to Data Engineer / Analytics Engineer roles in the UK.</p>
+          <div class="btns">
+            <a class="btn primary" href="#projects">View Projects</a>
+            <a class="btn" href="https://github.com/Kathirninja" target="_blank" rel="noopener">GitHub</a>
+            <a class="btn" href="#contact">Contact</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <!-- Projects -->
+        <div class="card" id="projects">
+          <h2>Featured Projects</h2>
+
+          <div class="grid">
+            <div class="proj">
+              <strong>End-to-End ELT Pipeline</strong>
+              <p class="meta">Raw → staging → marts • tests • reproducible Docker setup</p>
+              <div class="links">
+                <a href="https://github.com/Kathirninja/e2e-elt-pipeline" target="_blank" rel="noopener">Repo</a>
+                <a href="#contact">Ask for demo</a>
+              </div>
+            </div>
+
+            <div class="proj">
+              <strong>SQL Business Case Studies</strong>
+              <p class="meta">Cohorts • funnels • retention • window functions • optimised queries</p>
+              <div class="links">
+                <a href="https://github.com/Kathirninja/sql-business-cases" target="_blank" rel="noopener">Repo</a>
+                <a href="#stack">Skills</a>
+              </div>
+            </div>
+
+            <div class="proj">
+              <strong>Streaming Data Pipeline</strong>
+              <p class="meta">Event ingestion • consumers • idempotency • near real-time outputs</p>
+              <div class="links">
+                <a href="https://github.com/Kathirninja/streaming-data-pipeline" target="_blank" rel="noopener">Repo</a>
+                <a href="#contact">Contact</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stack + what you do -->
+        <div class="mini">
+          <div class="card" id="stack">
+            <h2>Stack</h2>
+            <ul class="clean">
+              <li><strong>SQL:</strong> PostgreSQL, modelling, optimisation, window functions</li>
+              <li><strong>Python:</strong> pandas, ETL scripts, APIs, scheduling</li>
+              <li><strong>Orchestration:</strong> Airflow / Prefect</li>
+              <li><strong>Transform:</strong> dbt, tests, docs</li>
+              <li><strong>Ops:</strong> Git, Docker, CI basics</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h2>How I work</h2>
+            <ul class="clean">
+              <li>Design schemas for analytics (clean marts, clear definitions).</li>
+              <li>Automate ingestion + transformations with repeatable runs.</li>
+              <li>Add quality checks so bad data fails fast.</li>
+              <li>Document decisions so teams can trust the numbers.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Contact -->
+        <div class="card" id="contact">
+          <h2>Contact</h2>
+          <p class="meta" style="margin:0 0 12px;">
+            Want to discuss roles or projects? Message me here:
+          </p>
+          <div class="links">
+            <a href="https://github.com/Kathirninja" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://www.linkedin.com/in/YOUR-LINKEDIN" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="mailto:YOUR_EMAIL">Email</a>
+          </div>
+        </div>
+
+        <div class="footer">
+          © <span id="y"></span> Kathir • Built with GitHub Pages
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+
 
 
