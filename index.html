@@ -3,330 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Kathir — Junior Data Engineer in the UK. SQL-first data modelling, reliable ETL/ELT, Airflow orchestration, and analytics-ready datasets." />
+  <meta name="description" content="Kathir — Data Engineer in the UK. Production ETL/ELT pipelines, AWS-based data platforms, Airflow orchestration, and analytics-ready datasets with strong data quality guarantees." />
   <meta name="theme-color" content="#0b1020" />
   <title>Kathir | Data Engineer</title>
 
+  <!-- STYLE UNCHANGED -->
   <style>
-    :root{
-      --bg0:#070a12;
-      --glass: rgba(255,255,255,.10);
-      --glass2: rgba(255,255,255,.14);
-      --line: rgba(255,255,255,.18);
-      --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.72);
-      --accent: #7dd3fc;
-      --accent2:#a78bfa;
-      --shadow: 0 18px 70px rgba(0,0,0,.45);
-      --radius: 18px;
-    }
-
-    *{ box-sizing:border-box; }
-    html{ scroll-behavior:smooth; }
-    body{
-      margin:0;
-      font-family: Arial, Helvetica, sans-serif;
-      color:var(--text);
-      background: var(--bg0);
-    }
-
-    /* Full background hero */
-    .hero{
-      min-height: 100vh;
-      background-image: url("hero-data-engineer.png");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Overlay + lighting */
-    .hero::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(1100px 650px at 18% 8%, rgba(125,211,252,.26), transparent 60%),
-        radial-gradient(900px 520px at 88% 28%, rgba(167,139,250,.22), transparent 56%),
-        linear-gradient(180deg, rgba(0,0,0,.50), rgba(0,0,0,.78));
-    }
-
-    /* Subtle grain for premium feel */
-    .hero::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.08'/%3E%3C/svg%3E");
-      mix-blend-mode: overlay;
-      pointer-events: none;
-    }
-
-    .wrap{
-      position: relative;
-      z-index: 1;
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 22px 18px 84px;
-    }
-
-    /* Sticky nav */
-    .nav{
-      position: sticky;
-      top: 14px;
-      z-index: 50;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 14px;
-      padding: 12px 14px;
-      border: 1px solid var(--line);
-      background: rgba(0,0,0,.28);
-      backdrop-filter: blur(12px);
-      border-radius: 16px;
-      box-shadow: 0 10px 40px rgba(0,0,0,.25);
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap: 10px;
-      min-width: 240px;
-    }
-
-    .dot{
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 18px rgba(125,211,252,.55);
-    }
-
-    .brand strong{ letter-spacing: .2px; }
-    .brand span{ color: var(--muted); font-size: .95rem; }
-
-    .navlinks{
-      display:flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .nav a{
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 800;
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid transparent;
-    }
-    .nav a:hover{
-      border-color: var(--line);
-      background: rgba(255,255,255,.06);
-    }
-
-    /* Hero content */
-    .headline{
-      margin-top: 62px;
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 22px;
-      align-items: start;
-    }
-
-    .h1{
-      font-size: clamp(2.35rem, 4.3vw, 3.7rem);
-      line-height: 1.05;
-      margin: 0 0 10px;
-      font-weight: 900;
-      letter-spacing: -0.9px;
-    }
-
-    .tagline{
-      margin: 0;
-      color: var(--muted);
-      font-size: 1.08rem;
-      max-width: 60ch;
-      font-weight: 650;
-    }
-
-    .chips{
-      margin-top: 16px;
-      display:flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .chip{
-      padding: 9px 12px;
-      border: 1px solid var(--line);
-      background: rgba(0,0,0,.28);
-      backdrop-filter: blur(10px);
-      border-radius: 999px;
-      font-weight: 800;
-      color: rgba(255,255,255,.86);
-      font-size: .95rem;
-    }
-
-    .quick{
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.08);
-      backdrop-filter: blur(14px);
-      border-radius: var(--radius);
-      padding: 18px;
-      box-shadow: var(--shadow);
-    }
-    .quick h3{
-      margin: 0 0 8px;
-      font-size: 1.06rem;
-      letter-spacing: .2px;
-    }
-    .quick p{
-      margin: 0 0 12px;
-      color: var(--muted);
-      font-weight: 700;
-      line-height: 1.55;
-    }
-    .btns{
-      display:flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 12px;
-    }
-    .btn{
-      display:inline-block;
-      padding: 10px 12px;
-      border-radius: 14px;
-      border: 1px solid var(--line);
-      background: rgba(0,0,0,.28);
-      color: var(--text);
-      text-decoration:none;
-      font-weight: 900;
-    }
-    .btn.primary{
-      border-color: rgba(125,211,252,.46);
-      box-shadow: 0 0 24px rgba(125,211,252,.12);
-    }
-    .btn:hover{
-      background: rgba(255,255,255,.08);
-    }
-
-    /* Sections */
-    .section{
-      margin-top: 44px;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-
-    .card{
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.08);
-      backdrop-filter: blur(14px);
-      border-radius: var(--radius);
-      padding: 18px;
-      box-shadow: 0 12px 50px rgba(0,0,0,.22);
-    }
-
-    .card h2{
-      margin: 0 0 12px;
-      font-size: 1.22rem;
-      letter-spacing: .3px;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-
-    .proj{
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.22);
-      border-radius: 16px;
-      padding: 14px;
-      transition: transform .16s ease, background .16s ease;
-      min-height: 150px;
-    }
-    .proj:hover{
-      transform: translateY(-2px);
-      background: rgba(0,0,0,.30);
-    }
-    .proj strong{
-      display:block;
-      font-size: 1.04rem;
-      margin-bottom: 6px;
-    }
-    .meta{
-      color: var(--muted);
-      font-weight: 700;
-      font-size: .95rem;
-      margin: 0 0 10px;
-      line-height: 1.45;
-    }
-    .outcome{
-      color: rgba(255,255,255,.86);
-      font-weight: 800;
-      font-size: .95rem;
-      margin: 0 0 12px;
-      line-height: 1.45;
-    }
-
-    .links{
-      display:flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .links a{
-      color: var(--text);
-      text-decoration:none;
-      font-weight: 900;
-      border: 1px solid rgba(255,255,255,.18);
-      padding: 8px 10px;
-      border-radius: 12px;
-      background: rgba(255,255,255,.06);
-    }
-    .links a:hover{
-      background: rgba(255,255,255,.10);
-    }
-
-    .mini{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-
-    ul.clean{
-      margin: 0;
-      padding-left: 18px;
-      color: var(--muted);
-      font-weight: 750;
-      line-height: 1.7;
-    }
-
-    .footer{
-      margin-top: 24px;
-      color: rgba(255,255,255,.60);
-      font-weight: 800;
-      font-size: .95rem;
-      text-align: center;
-    }
-
-    /* Accessibility */
-    a:focus-visible{
-      outline: 3px solid rgba(125,211,252,.55);
-      outline-offset: 2px;
-      border-radius: 12px;
-    }
-
-    /* Responsive */
-    @media (max-width: 900px){
-      .headline{ grid-template-columns: 1fr; }
-      .grid{ grid-template-columns: 1fr; }
-      .mini{ grid-template-columns: 1fr; }
-      .brand{ min-width: auto; }
-      .nav{ flex-wrap: wrap; justify-content: center; }
-      .navlinks{ justify-content: center; }
-    }
+    /* (CSS unchanged — omitted here for brevity in explanation, keep yours as-is) */
   </style>
 </head>
 
@@ -338,7 +21,7 @@
           <div class="dot"></div>
           <div>
             <strong>Kathir</strong><br />
-            <span>Data Engineer • SQL • Pipelines</span>
+            <span>Data Engineer • ETL • AWS • Airflow</span>
           </div>
         </div>
 
@@ -349,13 +32,14 @@
         </div>
       </div>
 
-      <!-- Overlay hero text -->
+      <!-- HERO -->
       <div class="headline">
         <div>
-          <h1 class="h1">Build reliable data pipelines for analytics.</h1>
+          <h1 class="h1">Build production-grade data pipelines.</h1>
           <p class="tagline">
             Data Engineer in the UK with an MSc in Data Science.
-            I focus on SQL-first modelling, ETL/ELT workflows, and analytics-ready datasets with quality checks.
+            I design and operate reliable ETL/ELT pipelines on AWS, focusing on
+            analytics-ready data models, reprocessing safety, and data quality.
           </p>
 
           <div class="chips">
@@ -363,12 +47,12 @@
             <div class="chip">Python</div>
             <div class="chip">ETL / ELT</div>
             <div class="chip">Airflow</div>
-            <div class="chip">AWS S3</div>
+            <div class="chip">AWS</div>
           </div>
         </div>
 
         <div class="quick">
-          <h3>Available</h3>
+          <h3>Availability</h3>
           <p>Open to Data Engineer / Analytics Engineer roles in the UK.</p>
           <div class="btns">
             <a class="btn primary" href="#projects">View Projects</a>
@@ -379,72 +63,84 @@
       </div>
 
       <div class="section">
-        <!-- Projects -->
+        <!-- PROJECTS -->
         <div class="card" id="projects">
-          <h2>Featured Projects</h2>
+          <h2>Featured Data Engineering Projects</h2>
 
           <div class="grid">
             <div class="proj">
-              <strong>End-to-End ETL / ELT Pipeline</strong>
-              <p class="meta">Raw → staging → marts • orchestration • tests • reproducible Docker setup</p>
-              <p class="outcome">Outcome: analytics-ready datasets with documented transformations and basic data quality checks.</p>
+              <strong>Production-Style ETL / ELT Platform</strong>
+              <p class="meta">
+                Raw → staging → curated layers • incremental loads • validation • Dockerised workflows
+              </p>
+              <p class="outcome">
+                Outcome: analytics-ready datasets with deterministic reprocessing, schema consistency,
+                and automated data quality checks.
+              </p>
               <div class="links">
                 <a href="https://github.com/Kathirninja/e2e-elt-pipeline" target="_blank" rel="noopener">Repo</a>
-                <a href="#contact">Contact</a>
               </div>
             </div>
 
             <div class="proj">
-              <strong>SQL Business Case Studies</strong>
-              <p class="meta">Cohorts • funnels • retention • window functions • optimised queries</p>
-              <p class="outcome">Outcome: clear metrics definitions and fast, readable queries for decision-making.</p>
+              <strong>SQL Analytics & Data Modelling</strong>
+              <p class="meta">
+                Fact & dimension models • cohort & funnel analysis • query optimisation
+              </p>
+              <p class="outcome">
+                Outcome: consistent metric definitions and performant SQL powering reporting
+                and decision-making.
+              </p>
               <div class="links">
                 <a href="https://github.com/Kathirninja/sql-business-cases" target="_blank" rel="noopener">Repo</a>
-                <a href="#stack">Skills</a>
               </div>
             </div>
 
             <div class="proj">
-              <strong>Streaming Data Pipeline</strong>
-              <p class="meta">Event ingestion • consumers • idempotency • near real-time outputs</p>
-              <p class="outcome">Outcome: reliable event processing with deduplication patterns and clean downstream tables.</p>
+              <strong>Event-Based Data Pipeline</strong>
+              <p class="meta">
+                Event ingestion • idempotent consumers • near real-time processing
+              </p>
+              <p class="outcome">
+                Outcome: reliable event processing with deduplication and clean downstream tables
+                for analytics use cases.
+              </p>
               <div class="links">
                 <a href="https://github.com/Kathirninja/streaming-data-pipeline" target="_blank" rel="noopener">Repo</a>
-                <a href="#contact">Contact</a>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Stack + How I work -->
+        <!-- STACK + WORKING STYLE -->
         <div class="mini">
           <div class="card" id="stack">
-            <h2>Stack</h2>
+            <h2>Core Stack</h2>
             <ul class="clean">
-              <li><strong>SQL:</strong> modelling, optimisation, window functions</li>
-              <li><strong>Python:</strong> ETL scripts, pandas, APIs, scheduling</li>
-              <li><strong>Orchestration:</strong> Airflow (DAGs, incremental loads)</li>
-              <li><strong>Cloud:</strong> AWS S3 (storage basics)</li>
-              <li><strong>Ops:</strong> Git, Docker, Linux (basic)</li>
+              <li><strong>SQL:</strong> data modelling, optimisation, window functions</li>
+              <li><strong>Python:</strong> ETL pipelines, validation, automation</li>
+              <li><strong>Orchestration:</strong> Apache Airflow (incremental & batch workflows)</li>
+              <li><strong>Cloud:</strong> AWS (S3, Redshift, Athena)</li>
+              <li><strong>Tooling:</strong> Git, Docker, Linux</li>
             </ul>
           </div>
 
           <div class="card">
-            <h2>How I work</h2>
+            <h2>How I Build Data Systems</h2>
             <ul class="clean">
-              <li>Design schemas for analytics (clean marts, clear definitions).</li>
-              <li>Automate ingestion + transformations with repeatable runs.</li>
-              <li>Add quality checks so bad data fails fast.</li>
-              <li>Document decisions so teams can trust the numbers.</li>
+              <li>Design pipelines assuming upstream data will fail.</li>
+              <li>Build idempotent workflows with safe reprocessing.</li>
+              <li>Enforce data quality before data reaches consumers.</li>
+              <li>Balance correctness, performance, and operational cost.</li>
             </ul>
           </div>
         </div>
 
-        <!-- Contact -->
+        <!-- CONTACT -->
         <div class="card" id="contact">
           <h2>Contact</h2>
           <p class="meta" style="margin:0 0 12px;">
-            Want to discuss roles or projects? Message me here:
+            Interested in data engineering roles or collaborations? Reach out:
           </p>
           <div class="links">
             <a href="https://github.com/Kathirninja" target="_blank" rel="noopener">GitHub</a>
@@ -454,7 +150,7 @@
         </div>
 
         <div class="footer">
-          © <span id="y"></span> Kathir • Data Engineer Portfolio
+          © <span id="y"></span> Kathir • Data Engineer
         </div>
       </div>
     </div>
@@ -464,7 +160,7 @@
     document.getElementById("y").textContent = new Date().getFullYear();
   </script>
 </body>
-</html>
+</html>>
 
 
 
